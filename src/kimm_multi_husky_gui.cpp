@@ -29,8 +29,7 @@ namespace kimm_multi_husky_gui
                 nh_.getParam("/robot_group1", group_name_[1]);    //check
 
             nh_.getParam("/" + group_name_[i] +"/issimulation", issimulation_[i]);
-            
-            
+
             nh_.getParam("/" + group_name_[i] +"_gui/rviz_urdf_path", model_path);    
             nh_.getParam("/" + group_name_[i] +"_gui/rviz_urdf", urdf_name);  
             
@@ -46,6 +45,10 @@ namespace kimm_multi_husky_gui
 
             run_pub_[i] = nh_.advertise<std_msgs::Bool>("/" + group_name_[i] + "/mujoco_ros/mujoco_ros_interface/sim_run", 100);
             quit_pub_[i] = nh_.advertise<std_msgs::Bool>("/" + group_name_[i] + "/mujoco_ros/mujoco_ros_interface/sim_quit", 100);
+
+            joint_action_pub_[i] = nh_.advertise<kimm_joint_planner_ros_interface::JointAction>("/" + group_name_[i]  + "_gui/kimm_joint_planner_ros_interface_server/joint_action", 100);
+            se3_action_pub_[i] = nh_.advertise<kimm_se3_planner_ros_interface::SE3Action>("/" + group_name_[i]  + "_gui/kimm_se3_planner_ros_interface_server/se3_action", 100);
+            mobile_action_pub_[i] = nh_.advertise<kimm_path_planner_ros_interface::MobileTrajectory>("/" + group_name_[i]  + "_gui/kimm_path_planner_ros_interface_server/mobile_action", 100);
 
             base_traj_resp_pub_[i] = nh_.advertise<visualization_msgs::MarkerArray>("/" + group_name_[i]  + "_gui/kimm_mobile_plan_markers/mobile/response", 100);
             base_traj_req_pub_[i] = nh_.advertise<visualization_msgs::MarkerArray>("/" + group_name_[i]  + "_gui/kimm_mobile_plan_markers/mobile/request", 100);
@@ -84,14 +87,11 @@ namespace kimm_multi_husky_gui
         }     
 
         if (issimulation_[0]){  
-             ROS_WARN_STREAM("nooo");
             jointstate_sub_[0] = nh_.subscribe("/" + group_name_[0] + "/mujoco_ros/mujoco_ros_interface/joint_states", 100, &HuskyGui::jointStateCallback0, this);
             ee_state_sub_[0] = nh_.subscribe("/" + group_name_[0] + "/mujoco_ros//mujoco_ros_interface/ee_state", 100, &HuskyGui::eeStateCallback0, this);
             base_state_sub_[0] = nh_.subscribe("/" + group_name_[0] + "/mujoco_ros/mujoco_ros_interface/base_state", 100, &HuskyGui::baseStateCallback0, this);
         }
         else{
-            ROS_WARN_STREAM("here");
-            
             jointstate_sub_[0] = nh_.subscribe("/" + group_name_[0] + "/real_robot/joint_states", 100, &HuskyGui::jointStateCallback0, this);
             ee_state_sub_[0] = nh_.subscribe("/" + group_name_[0] + "/real_robot/ee_state", 100, &HuskyGui::eeStateCallback0, this);
             base_state_sub_[0] = nh_.subscribe("/" + group_name_[0] + "/real_robot/base_state", 100, &HuskyGui::baseStateCallback0, this);

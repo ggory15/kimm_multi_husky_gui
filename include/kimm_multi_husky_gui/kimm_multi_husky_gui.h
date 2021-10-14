@@ -42,10 +42,12 @@
 #include <geometry_msgs/Pose2D.h>
 
 #include "kimm_joint_planner_ros_interface/plan_joint_path.h"
+#include "kimm_joint_planner_ros_interface/JointAction.h"
 #include "kimm_path_planner_ros_interface/plan_mobile_path.h"
 #include "kimm_path_planner_ros_interface/MobileTrajectory.h"
 #include "kimm_path_planner_ros_interface/Obstacle2D.h"
 #include "kimm_se3_planner_ros_interface/plan_se3_path.h"
+#include "kimm_se3_planner_ros_interface/SE3Action.h"
 #include <visualization_msgs/MarkerArray.h>
 
 #include <Eigen/Dense>
@@ -515,6 +517,18 @@ namespace kimm_multi_husky_gui
             }
             ui_.joint_trajectory_log->appendPlainText(QString::fromStdString(log));
             target_q_vec_.clear();
+
+            kimm_joint_planner_ros_interface::JointAction joint_action_msg;
+            joint_action_msg.kp = plan_joint_srv_[robot].request.kp;
+            joint_action_msg.kv = plan_joint_srv_[robot].request.kv;
+            joint_action_msg.duration = plan_joint_srv_[robot].request.duration;
+            joint_action_msg.target_joint = plan_joint_srv_[robot].request.target_joint;
+            joint_action_msg.traj_type = plan_joint_srv_[robot].request.traj_type;
+
+            joint_action_pub_[robot].publish(joint_action_msg);
+
+
+
         }
         virtual void jointctrlcb2(){
             int i = ui_.husky_num->currentIndex(); 
@@ -592,13 +606,6 @@ namespace kimm_multi_husky_gui
                 obs_2d.y2.data = obs(3);
                 obs_vec_.push_back(obs_2d);
             }
-            kimm_path_planner_ros_interface::Obstacle2D obs_2d_const;
-            obs_2d_const.x1.data = -4.8;
-            obs_2d_const.y1.data = -4.8;
-            obs_2d_const.x2.data = -4.9;
-            obs_2d_const.y2.data = -4.9;
-            obs_vec_.push_back(obs_2d_const);
-
             plan_mobile_srv_[robot].request.Obstacles2D = obs_vec_;
             mobile_plan_client_[robot].call(plan_mobile_srv_[robot]);
             
@@ -693,6 +700,10 @@ namespace kimm_multi_husky_gui
             }
 
             base_traj_req_pub_[robot].publish(req_list);
+
+            kimm_path_planner_ros_interface::MobileTrajectory mobile_msg;
+            mobile_msg.points = plan_mobile_srv_[robot].response.mobile_path.points;
+            mobile_action_pub_[robot].publish(mobile_msg);
         }
         virtual void basectrlcb2(){
             int robot = ui_.husky_num->currentIndex(); 
@@ -924,6 +935,17 @@ namespace kimm_multi_husky_gui
 
             ee_traj_resp_pub_[robot].publish(response_list);
 
+            kimm_se3_planner_ros_interface::SE3Action se3_action_msg;
+            se3_action_msg.kp = plan_se3_srv_[robot].request.kp;
+            se3_action_msg.kv = plan_se3_srv_[robot].request.kv;
+            se3_action_msg.duration = plan_se3_srv_[robot].request.duration;
+            se3_action_msg.target_se3 = plan_se3_srv_[robot].request.target_se3;
+            se3_action_msg.traj_type = plan_se3_srv_[robot].request.traj_type;
+            se3_action_msg.iswholebody = plan_se3_srv_[robot].request.iswholebody;
+
+            se3_action_pub_[robot].publish(se3_action_msg);
+
+
         }
         virtual void se3ctrlcb2(){
             int robot = ui_.husky_num->currentIndex(); 
@@ -972,6 +994,7 @@ namespace kimm_multi_husky_gui
 
     public:
         ros::Publisher run_pub_[2], quit_pub_[2], custom_ctrl_pub_[2], base_traj_resp_pub_[2], base_traj_req_pub_[2], obs_pub_[2], ee_traj_resp_pub_[2];
+        ros::Publisher joint_action_pub_[2], se3_action_pub_[2], mobile_action_pub_[2];
         ros::Subscriber simtime_sub_[2], jointstate_sub_[2], torquestate_sub_[2], base_state_sub_[2], ee_state_sub_[2];
         ros::ServiceClient joint_plan_client_[2], mobile_plan_client_[2], se3_plan_client_[2];
 
