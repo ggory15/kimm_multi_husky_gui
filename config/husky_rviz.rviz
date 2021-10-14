@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /NS0_Robot1
+        - /MarkerArray3
+        - /MarkerArray4
       Splitter Ratio: 0.5
     Tree Height: 691
   - Class: rviz/Selection
@@ -353,6 +355,38 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /ns0_gui/kimm_mobile_plan_markers/mobile/response
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /ns1_gui/kimm_mobile_plan_markers/mobile/response
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /ns0_gui/kimm_se3_plan_markers/robot/response
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /ns1_gui/kimm_se3_plan_markers/robot/response
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -397,9 +431,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.26039841771125793
+      Pitch: 0.9653982520103455
       Target Frame: <Fixed Frame>
-      Yaw: 4.85540246963501
+      Yaw: 5.075403213500977
     Saved: ~
 Window Geometry:
   Displays:

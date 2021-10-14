@@ -161,32 +161,32 @@ namespace kimm_multi_husky_gui
         connect(ui_.Customctrlbtn_10, SIGNAL(pressed()), this, SLOT(CustomCtrl10Callback()));
 
         // Joint Controller Interface to Mujoco
-        // connect(ui_.joint_ctrl_btn, SIGNAL(pressed()), this, SLOT(jointctrlbtn()));
-        // ui_.joint_ctrl_btn->setShortcut(QKeySequence(Qt::Key_2));
-        // connect(ui_.joint_trajectory_send, SIGNAL(pressed()), this, SLOT(jointctrlcb()));
-        // connect(ui_.joint_trajectory_send_2, SIGNAL(pressed()), this, SLOT(jointctrlcb2()));
-        // connect(ui_.c_joint, SIGNAL(pressed()), this, SLOT(jointctrlcb3()));
-        // connect(ui_.waypoint_add_btn, SIGNAL(pressed()), this, SLOT(jointctrlcb4()));
-        // connect(ui_.waypoint_clear_btn, SIGNAL(pressed()), this, SLOT(jointctrlcb5()));
+        connect(ui_.joint_ctrl_btn, SIGNAL(pressed()), this, SLOT(jointctrlbtn()));
+        ui_.joint_ctrl_btn->setShortcut(QKeySequence(Qt::Key_2));
+        connect(ui_.joint_trajectory_send, SIGNAL(pressed()), this, SLOT(jointctrlcb()));
+        connect(ui_.joint_trajectory_send_2, SIGNAL(pressed()), this, SLOT(jointctrlcb2()));
+        connect(ui_.c_joint, SIGNAL(pressed()), this, SLOT(jointctrlcb3()));
+        connect(ui_.waypoint_add_btn, SIGNAL(pressed()), this, SLOT(jointctrlcb4()));
+        connect(ui_.waypoint_clear_btn, SIGNAL(pressed()), this, SLOT(jointctrlcb5()));
 
         // // SE3 Controller Interface to Mujoco
-        // connect(ui_.se3_ctrl_btn, SIGNAL(pressed()), this, SLOT(se3ctrlbtn()));
-        // ui_.se3_ctrl_btn->setShortcut(QKeySequence(Qt::Key_3));
-        // connect(ui_.se3_trajectory_send_1, SIGNAL(pressed()), this, SLOT(se3ctrlcb1()));
-        // connect(ui_.se3_trajectory_send_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb2()));
-        // connect(ui_.c_joint_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb3()));
-        // connect(ui_.waypoint_add_btn_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb4()));
-        // connect(ui_.waypoint_clear_btn_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb5()));
+        connect(ui_.se3_ctrl_btn, SIGNAL(pressed()), this, SLOT(se3ctrlbtn()));
+        ui_.se3_ctrl_btn->setShortcut(QKeySequence(Qt::Key_3));
+        connect(ui_.se3_trajectory_send_1, SIGNAL(pressed()), this, SLOT(se3ctrlcb1()));
+        connect(ui_.se3_trajectory_send_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb2()));
+        connect(ui_.c_joint_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb3()));
+        connect(ui_.waypoint_add_btn_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb4()));
+        connect(ui_.waypoint_clear_btn_2, SIGNAL(pressed()), this, SLOT(se3ctrlcb5()));
 
         // // Base Controller Interface to Mujoco
-        // connect(ui_.base_ctrl_btn, SIGNAL(pressed()), this, SLOT(basectrlbtn()));
-        // ui_.base_ctrl_btn->setShortcut(QKeySequence(Qt::Key_4));
-        // connect(ui_.base_p_set_btn, SIGNAL(pressed()), this, SLOT(basectrlcb1())); // set configuration
-        // connect(ui_.base_p_run, SIGNAL(pressed()), this, SLOT(basectrlcb2())); // run planner
-        // connect(ui_.forward_btn, SIGNAL(pressed()), this, SLOT(basectrlcb3())); // run forward
-        // connect(ui_.backward_btn, SIGNAL(pressed()), this, SLOT(basectrlcb4())); // run backward
-        // connect(ui_.obs_add_btn, SIGNAL(pressed()), this, SLOT(basectrlcb5())); // obs add
-        // connect(ui_.obs_del_btn, SIGNAL(pressed()), this, SLOT(basectrlcb6())); // obs del
+        connect(ui_.base_ctrl_btn, SIGNAL(pressed()), this, SLOT(basectrlbtn()));
+        ui_.base_ctrl_btn->setShortcut(QKeySequence(Qt::Key_4));
+        connect(ui_.base_p_set_btn, SIGNAL(pressed()), this, SLOT(basectrlcb1())); // set configuration
+        connect(ui_.base_p_run, SIGNAL(pressed()), this, SLOT(basectrlcb2())); // run planner
+        connect(ui_.forward_btn, SIGNAL(pressed()), this, SLOT(basectrlcb3())); // run forward
+        connect(ui_.backward_btn, SIGNAL(pressed()), this, SLOT(basectrlcb4())); // run backward
+        connect(ui_.obs_add_btn, SIGNAL(pressed()), this, SLOT(basectrlcb5())); // obs add
+        connect(ui_.obs_del_btn, SIGNAL(pressed()), this, SLOT(basectrlcb6())); // obs del
     }
 
 } // namespace kimm_husky_gui
