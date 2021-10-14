@@ -598,6 +598,7 @@ namespace kimm_multi_husky_gui
             obs_2d_const.x2.data = -4.9;
             obs_2d_const.y2.data = -4.9;
             obs_vec_.push_back(obs_2d_const);
+            
             plan_mobile_srv_[robot].request.Obstacles2D = obs_vec_;
             mobile_plan_client_[robot].call(plan_mobile_srv_[robot]);
             

@@ -1,5 +1,5 @@
 <launch>
-    <node name="husky_rqt_dashboard" pkg="rqt_gui" type="rqt_gui" respawn="false" output="screen" args="--perspective-file $(find kimm_multi_husky_gui)/config/gui.perspective" />
+    <node name="husky_rqt_dashboard" pkg="rqt_gui" type="rqt_gui" respawn="false" output="screen" args="--perspective-file $(find kimm_multi_husky_gui)/config/gui_rviz.perspective" />
 	<arg name="rvizconfig" default="$(find kimm_multi_husky_gui)/config/husky_rviz.rviz" />
 
 	<param name="robot_group0" type="string" value="ns0" />
