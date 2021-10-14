@@ -187,7 +187,7 @@ namespace kimm_multi_husky_gui
     //         ui_.currenttime->setText(QString::number(msg->data, 'f', 3));
     //     };
         virtual void Jointcb0(const sensor_msgs::JointStateConstPtr &msg){
-            if (issimulation_){
+            if (issimulation_[0]){
                 ui_.robot1_p1->setText(QString::number(msg->position[7] * DEGREE , 'f', 3));
                 ui_.robot1_p2->setText(QString::number(msg->position[8] * DEGREE , 'f', 3));
                 ui_.robot1_p3->setText(QString::number(msg->position[11] * DEGREE , 'f', 3));
@@ -221,7 +221,7 @@ namespace kimm_multi_husky_gui
                     q_[0](i+2) = msg->position[2+i];
             }
 
-            if (issimulation_){
+            if (issimulation_[0]){
                 for (int i=0; i<4; i++)
                     joint_state_msg_[0].position[i] = msg->position[i+7];
 
@@ -249,7 +249,7 @@ namespace kimm_multi_husky_gui
 
         }; 
         virtual void Jointcb1(const sensor_msgs::JointStateConstPtr &msg){
-            if (issimulation_){
+            if (issimulation_[1]){
                 ui_.robot2_p1->setText(QString::number(msg->position[7] * DEGREE , 'f', 3));
                 ui_.robot2_p2->setText(QString::number(msg->position[8] * DEGREE , 'f', 3));
                 ui_.robot2_p3->setText(QString::number(msg->position[11] * DEGREE , 'f', 3));
@@ -282,7 +282,7 @@ namespace kimm_multi_husky_gui
                     q_[1](i+2) = msg->position[2+i];
             }
 
-            if (issimulation_){
+            if (issimulation_[1]){
                 for (int i=0; i<4; i++)
                     joint_state_msg_[1].position[i] = msg->position[i+7];
 
@@ -598,7 +598,7 @@ namespace kimm_multi_husky_gui
             obs_2d_const.x2.data = -4.9;
             obs_2d_const.y2.data = -4.9;
             obs_vec_.push_back(obs_2d_const);
-            
+
             plan_mobile_srv_[robot].request.Obstacles2D = obs_vec_;
             mobile_plan_client_[robot].call(plan_mobile_srv_[robot]);
             
