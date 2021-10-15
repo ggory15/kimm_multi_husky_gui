@@ -246,7 +246,7 @@ namespace kimm_multi_husky_gui
                     joint_state_msg_[0].position[i+11] = msg->position[i+9];
             }
                          
-            joint_state_msg_[0].header.stamp = ros::Time::now();            
+            joint_state_msg_[0].header.stamp = ros::Time::Now();            
             joint_state_pub_[0].publish(joint_state_msg_[0]);
 
         }; 
@@ -307,7 +307,7 @@ namespace kimm_multi_husky_gui
                     joint_state_msg_[1].position[i+11] = msg->position[i+9];
             }
                          
-            joint_state_msg_[1].header.stamp = ros::Time::now();            
+            joint_state_msg_[1].header.stamp = ros::Time::Now();            
             joint_state_pub_[1].publish(joint_state_msg_[1]);
 
         }; 
@@ -519,7 +519,7 @@ namespace kimm_multi_husky_gui
             target_q_vec_.clear();
 
             kimm_joint_planner_ros_interface::JointAction joint_action_msg;
-            joint_action_msg.time = ros::Time::now();
+            joint_action_msg.time = ros::Time::Now();
             joint_action_msg.kp = plan_joint_srv_[robot].request.kp;
             joint_action_msg.kv = plan_joint_srv_[robot].request.kv;
             joint_action_msg.duration = plan_joint_srv_[robot].request.duration;
