@@ -4,6 +4,7 @@
         "string": "cpp",
         "string_view": "cpp",
         "bitset": "cpp",
-        "core": "cpp"
+        "core": "cpp",
+        "chrono": "cpp"
     }
 }

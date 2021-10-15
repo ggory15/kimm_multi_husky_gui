@@ -519,6 +519,7 @@ namespace kimm_multi_husky_gui
             target_q_vec_.clear();
 
             kimm_joint_planner_ros_interface::JointAction joint_action_msg;
+            joint_action_msg.time = ros::Time::now();
             joint_action_msg.kp = plan_joint_srv_[robot].request.kp;
             joint_action_msg.kv = plan_joint_srv_[robot].request.kv;
             joint_action_msg.duration = plan_joint_srv_[robot].request.duration;
@@ -606,6 +607,12 @@ namespace kimm_multi_husky_gui
                 obs_2d.y2.data = obs(3);
                 obs_vec_.push_back(obs_2d);
             }
+            kimm_path_planner_ros_interface::Obstacle2D obs_2d;
+            obs_2d.x1.data = -4.9;
+            obs_2d.y1.data = -4.9;
+            obs_2d.x2.data = -4.95;
+            obs_2d.y2.data = -4.95;
+            obs_vec_.push_back(obs_2d);
             plan_mobile_srv_[robot].request.Obstacles2D = obs_vec_;
             mobile_plan_client_[robot].call(plan_mobile_srv_[robot]);
             
@@ -702,6 +709,7 @@ namespace kimm_multi_husky_gui
             base_traj_req_pub_[robot].publish(req_list);
 
             kimm_path_planner_ros_interface::MobileTrajectory mobile_msg;
+            mobile_msg.time = ros::Time::now();
             mobile_msg.points = plan_mobile_srv_[robot].response.mobile_path.points;
             mobile_action_pub_[robot].publish(mobile_msg);
         }
@@ -936,6 +944,7 @@ namespace kimm_multi_husky_gui
             ee_traj_resp_pub_[robot].publish(response_list);
 
             kimm_se3_planner_ros_interface::SE3Action se3_action_msg;
+            se3_action_msg.time = ros::Time::now();
             se3_action_msg.kp = plan_se3_srv_[robot].request.kp;
             se3_action_msg.kv = plan_se3_srv_[robot].request.kv;
             se3_action_msg.duration = plan_se3_srv_[robot].request.duration;

@@ -46,9 +46,9 @@ namespace kimm_multi_husky_gui
             run_pub_[i] = nh_.advertise<std_msgs::Bool>("/" + group_name_[i] + "/mujoco_ros/mujoco_ros_interface/sim_run", 100);
             quit_pub_[i] = nh_.advertise<std_msgs::Bool>("/" + group_name_[i] + "/mujoco_ros/mujoco_ros_interface/sim_quit", 100);
 
-            joint_action_pub_[i] = nh_.advertise<kimm_joint_planner_ros_interface::JointAction>("/" + group_name_[i]  + "_gui/kimm_joint_planner_ros_interface_server/joint_action", 100);
-            se3_action_pub_[i] = nh_.advertise<kimm_se3_planner_ros_interface::SE3Action>("/" + group_name_[i]  + "_gui/kimm_se3_planner_ros_interface_server/se3_action", 100);
-            mobile_action_pub_[i] = nh_.advertise<kimm_path_planner_ros_interface::MobileTrajectory>("/" + group_name_[i]  + "_gui/kimm_path_planner_ros_interface_server/mobile_action", 100);
+            joint_action_pub_[i] = nh_.advertise<kimm_joint_planner_ros_interface::JointAction>("/" + group_name_[i]  + "_gui/kimm_joint_planner_ros_interface_server/joint_action", 1);
+            se3_action_pub_[i] = nh_.advertise<kimm_se3_planner_ros_interface::SE3Action>("/" + group_name_[i]  + "_gui/kimm_se3_planner_ros_interface_server/se3_action", 1);
+            mobile_action_pub_[i] = nh_.advertise<kimm_path_planner_ros_interface::MobileTrajectory>("/" + group_name_[i]  + "_gui/kimm_path_planner_ros_interface_server/mobile_action", 1);
 
             base_traj_resp_pub_[i] = nh_.advertise<visualization_msgs::MarkerArray>("/" + group_name_[i]  + "_gui/kimm_mobile_plan_markers/mobile/response", 100);
             base_traj_req_pub_[i] = nh_.advertise<visualization_msgs::MarkerArray>("/" + group_name_[i]  + "_gui/kimm_mobile_plan_markers/mobile/request", 100);
