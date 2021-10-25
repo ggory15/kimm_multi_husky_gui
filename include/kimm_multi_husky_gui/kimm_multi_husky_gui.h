@@ -148,32 +148,40 @@ namespace kimm_multi_husky_gui
             custom_ctrl_pub_[1].publish(int16_msg_[0]);
         };
         virtual void CustomCtrl4Callback(){
-            int16_msg_[0].data = 4;
+            int16_msg_[0].data = 899;
             custom_ctrl_pub_[0].publish(int16_msg_[0]);
             custom_ctrl_pub_[1].publish(int16_msg_[0]);
         };
         virtual void CustomCtrl5Callback(){
-            int16_msg_[0].data = 5;
+            int16_msg_[0].data = 4;
             custom_ctrl_pub_[0].publish(int16_msg_[0]);
             custom_ctrl_pub_[1].publish(int16_msg_[0]);
         };
         virtual void CustomCtrl6Callback(){
+            int16_msg_[0].data = 5;
+            custom_ctrl_pub_[0].publish(int16_msg_[0]);
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        virtual void CustomCtrl7Callback(){ // soft
+            int16_msg_[1].data = 1;
+            mob_pub_[0].publish(int16_msg_[1]);
+            mob_pub_[1].publish(int16_msg_[1]);
+            int16_msg_[0].data = 888;
+            custom_ctrl_pub_[0].publish(int16_msg_[0]);
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+
+        }; 
+        virtual void CustomCtrl8Callback(){ // hard
+            int16_msg_[1].data = 2;
+            mob_pub_[0].publish(int16_msg_[1]);
+            mob_pub_[1].publish(int16_msg_[1]);
+            int16_msg_[0].data = 887;
+            custom_ctrl_pub_[0].publish(int16_msg_[0]);
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+
+        };
+        virtual void CustomCtrl9Callback(){ // go
             int16_msg_[0].data = 6;
-            custom_ctrl_pub_[0].publish(int16_msg_[0]);
-            custom_ctrl_pub_[1].publish(int16_msg_[0]);
-        };
-        virtual void CustomCtrl7Callback(){
-            int16_msg_[0].data = 7;
-            custom_ctrl_pub_[0].publish(int16_msg_[0]);
-            custom_ctrl_pub_[1].publish(int16_msg_[0]);
-        };
-        virtual void CustomCtrl8Callback(){
-            int16_msg_[0].data = 8;
-            custom_ctrl_pub_[0].publish(int16_msg_[0]);
-            custom_ctrl_pub_[1].publish(int16_msg_[0]);
-        };
-        virtual void CustomCtrl9Callback(){
-            int16_msg_[0].data = 9;
             custom_ctrl_pub_[0].publish(int16_msg_[0]);
             custom_ctrl_pub_[1].publish(int16_msg_[0]);
         };
@@ -182,6 +190,67 @@ namespace kimm_multi_husky_gui
             custom_ctrl_pub_[0].publish(int16_msg_[0]);
             custom_ctrl_pub_[1].publish(int16_msg_[0]);
         };
+        virtual void CustomHusky1Ctrl1Callback(){
+            int16_msg_[0].data = 1;
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        virtual void CustomHusky2Ctrl1Callback(){
+            int16_msg_[0].data = 10;
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        virtual void CustomHusky3Ctrl1Callback(){ //soft
+            // int16_msg_[1].data = 1;
+            // mob_pub_[0].publish(int16_msg_[1]);
+            int16_msg_[0].data = 888;
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        virtual void CustomHusky4Ctrl1Callback(){
+            int16_msg_[0].data = 0;
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        virtual void CustomHusky5Ctrl1Callback(){
+            int16_msg_[0].data = 899;
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        virtual void CustomHusky6Ctrl1Callback(){
+            int16_msg_[1].data = 1;
+            custom_ctrl_pub_[1].publish(int16_msg_[1]);
+        };
+        virtual void CustomHusky7Ctrl1Callback(){
+            int16_msg_[1].data = 1;
+            mob_pub_[1].publish(int16_msg_[1]);
+        };
+        virtual void CustomHusky8Ctrl1Callback(){
+            int16_msg_[0].data = 11;
+            custom_ctrl_pub_[1].publish(int16_msg_[0]);
+        };
+        
+
+        virtual void MOBoffCallback1(){
+            int16_msg_[0].data = 0;
+            mob_pub_[0].publish(int16_msg_[0]);
+        }
+        virtual void MOBsoftCallback1(){
+            int16_msg_[0].data = 1;
+            mob_pub_[0].publish(int16_msg_[0]);
+        }
+        virtual void MOBhardCallback1(){
+            int16_msg_[0].data = 2;
+            mob_pub_[0].publish(int16_msg_[0]);
+        }
+        virtual void MOBoffCallback2(){
+            int16_msg_[1].data = 0;
+            mob_pub_[1].publish(int16_msg_[1]);
+        }
+        virtual void MOBsoftCallback2(){
+            int16_msg_[1].data = 1;
+            mob_pub_[1].publish(int16_msg_[1]);
+        }
+        virtual void MOBhardCallback2(){
+            int16_msg_[1].data = 2;
+            mob_pub_[1].publish(int16_msg_[1]);
+        }
+
 
 
     //     virtual void Timercb(const std_msgs::Float32ConstPtr &msg){
@@ -246,7 +315,7 @@ namespace kimm_multi_husky_gui
                     joint_state_msg_[0].position[i+11] = msg->position[i+9];
             }
                          
-            joint_state_msg_[0].header.stamp = ros::Time::Now();            
+            joint_state_msg_[0].header.stamp = ros::Time::now();            
             joint_state_pub_[0].publish(joint_state_msg_[0]);
 
         }; 
@@ -307,7 +376,7 @@ namespace kimm_multi_husky_gui
                     joint_state_msg_[1].position[i+11] = msg->position[i+9];
             }
                          
-            joint_state_msg_[1].header.stamp = ros::Time::Now();            
+            joint_state_msg_[1].header.stamp = ros::Time::now();            
             joint_state_pub_[1].publish(joint_state_msg_[1]);
 
         }; 
@@ -519,7 +588,7 @@ namespace kimm_multi_husky_gui
             target_q_vec_.clear();
 
             kimm_joint_planner_ros_interface::JointAction joint_action_msg;
-            joint_action_msg.time = ros::Time::Now();
+            joint_action_msg.time.data = ros::Time::now();
             joint_action_msg.kp = plan_joint_srv_[robot].request.kp;
             joint_action_msg.kv = plan_joint_srv_[robot].request.kv;
             joint_action_msg.duration = plan_joint_srv_[robot].request.duration;
@@ -709,7 +778,7 @@ namespace kimm_multi_husky_gui
             base_traj_req_pub_[robot].publish(req_list);
 
             kimm_path_planner_ros_interface::MobileTrajectory mobile_msg;
-            mobile_msg.time = ros::Time::now();
+            mobile_msg.time.data = ros::Time::now();
             mobile_msg.points = plan_mobile_srv_[robot].response.mobile_path.points;
             mobile_action_pub_[robot].publish(mobile_msg);
         }
@@ -944,7 +1013,7 @@ namespace kimm_multi_husky_gui
             ee_traj_resp_pub_[robot].publish(response_list);
 
             kimm_se3_planner_ros_interface::SE3Action se3_action_msg;
-            se3_action_msg.time = ros::Time::now();
+            se3_action_msg.time.data = ros::Time::now();
             se3_action_msg.kp = plan_se3_srv_[robot].request.kp;
             se3_action_msg.kv = plan_se3_srv_[robot].request.kv;
             se3_action_msg.duration = plan_se3_srv_[robot].request.duration;
@@ -1002,7 +1071,7 @@ namespace kimm_multi_husky_gui
         }
 
     public:
-        ros::Publisher run_pub_[2], quit_pub_[2], custom_ctrl_pub_[2], base_traj_resp_pub_[2], base_traj_req_pub_[2], obs_pub_[2], ee_traj_resp_pub_[2];
+        ros::Publisher run_pub_[2], quit_pub_[2], custom_ctrl_pub_[2], base_traj_resp_pub_[2], base_traj_req_pub_[2], obs_pub_[2], ee_traj_resp_pub_[2], mob_pub_[2];
         ros::Publisher joint_action_pub_[2], se3_action_pub_[2], mobile_action_pub_[2];
         ros::Subscriber simtime_sub_[2], jointstate_sub_[2], torquestate_sub_[2], base_state_sub_[2], ee_state_sub_[2];
         ros::ServiceClient joint_plan_client_[2], mobile_plan_client_[2], se3_plan_client_[2];

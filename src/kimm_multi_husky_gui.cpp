@@ -54,6 +54,7 @@ namespace kimm_multi_husky_gui
             base_traj_req_pub_[i] = nh_.advertise<visualization_msgs::MarkerArray>("/" + group_name_[i]  + "_gui/kimm_mobile_plan_markers/mobile/request", 100);
             ee_traj_resp_pub_[i] = nh_.advertise<visualization_msgs::MarkerArray>("/" + group_name_[i]  + "_gui/kimm_se3_plan_markers/robot/response", 100);
             joint_state_pub_[i] = nh_.advertise<sensor_msgs::JointState>("/" + group_name_[i]  +"_gui/joint_states", 100);
+            
 
             if (issimulation_[i]){
                 custom_ctrl_pub_[i] = nh_.advertise<std_msgs::Int16>("/" + group_name_[i] + "/mujoco_ros/mujoco_ros_interface/ctrl_type", 100);
@@ -61,6 +62,7 @@ namespace kimm_multi_husky_gui
                 
             }
             else {
+                mob_pub_[i] = nh_.advertise<std_msgs::Int16>("/" + group_name_[i]  + "/real_robot/mob_type", 100);
                 custom_ctrl_pub_[i] = nh_.advertise<std_msgs::Int16>("/" + group_name_[i] + "/real_robot/ctrl_type", 100);
                 simtime_sub_[i] = nh_.subscribe("/" + group_name_[i] + "/time", 100, &HuskyGui::timerCallback, this);                
             }
@@ -164,6 +166,15 @@ namespace kimm_multi_husky_gui
         connect(ui_.Customctrlbtn_9, SIGNAL(pressed()), this, SLOT(CustomCtrl9Callback()));
         connect(ui_.Customctrlbtn_10, SIGNAL(pressed()), this, SLOT(CustomCtrl10Callback()));
 
+        connect(ui_.husky2ctrl_1, SIGNAL(pressed()), this, SLOT(CustomHusky1Ctrl1Callback()));
+        connect(ui_.husky2ctrl_2, SIGNAL(pressed()), this, SLOT(CustomHusky2Ctrl1Callback()));
+        connect(ui_.husky2ctrl_3, SIGNAL(pressed()), this, SLOT(CustomHusky3Ctrl1Callback()));
+        connect(ui_.husky2ctrl_4, SIGNAL(pressed()), this, SLOT(CustomHusky4Ctrl1Callback()));
+        connect(ui_.husky2ctrl_5, SIGNAL(pressed()), this, SLOT(CustomHusky5Ctrl1Callback()));
+        connect(ui_.husky2ctrl_6, SIGNAL(pressed()), this, SLOT(CustomHusky6Ctrl1Callback()));
+        connect(ui_.husky2ctrl_7, SIGNAL(pressed()), this, SLOT(CustomHusky7Ctrl1Callback()));
+        connect(ui_.husky2ctrl_8, SIGNAL(pressed()), this, SLOT(CustomHusky8Ctrl1Callback()));
+
         // Joint Controller Interface to Mujoco
         connect(ui_.joint_ctrl_btn, SIGNAL(pressed()), this, SLOT(jointctrlbtn()));
         ui_.joint_ctrl_btn->setShortcut(QKeySequence(Qt::Key_2));
@@ -191,6 +202,14 @@ namespace kimm_multi_husky_gui
         connect(ui_.backward_btn, SIGNAL(pressed()), this, SLOT(basectrlcb4())); // run backward
         connect(ui_.obs_add_btn, SIGNAL(pressed()), this, SLOT(basectrlcb5())); // obs add
         connect(ui_.obs_del_btn, SIGNAL(pressed()), this, SLOT(basectrlcb6())); // obs del
+
+        // MOB
+        connect(ui_.husky1_moboff, SIGNAL(pressed()), this, SLOT(MOBoffCallback1()));
+        connect(ui_.husky1_mobsoft, SIGNAL(pressed()), this, SLOT(MOBsoftCallback1()));
+        connect(ui_.husky1_mobhard, SIGNAL(pressed()), this, SLOT(MOBhardCallback1()));
+        connect(ui_.husky2_moboff, SIGNAL(pressed()), this, SLOT(MOBoffCallback2()));
+        connect(ui_.husky2_mobsoft, SIGNAL(pressed()), this, SLOT(MOBsoftCallback2()));
+        connect(ui_.husky2_mobhard, SIGNAL(pressed()), this, SLOT(MOBhardCallback2()));
     }
 
 } // namespace kimm_husky_gui
